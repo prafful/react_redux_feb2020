@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import productNameClickedAction from '../actions/productNameClickedAction';
 
 
 class ProductName extends React.Component {
@@ -12,16 +14,14 @@ class ProductName extends React.Component {
            console.log(product);
            console.log(product.name);
            return(
-               <li key={product.id}>
+               <li key={product.id}  onClick={()=>this.props.clickProduct(product) }>
                     {product.name}
                </li>
            )
         })
 
     }
-
-
-    render() { 
+ render() { 
         return ( 
             <ol>
                 {this.renderAllProductsFromProps()}
@@ -31,12 +31,21 @@ class ProductName extends React.Component {
 }
 
 function convertStoreToProps(appStore){
+    console.log("store received by Product Name Container")
     console.log(appStore);
     return {
         allProducts: appStore.products1
     }
 }
 
+function mapActionToPropsAndDispatchItNow(dispatch){
+    //console.log(dispatch);
+    return bindActionCreators({
+        clickProduct: productNameClickedAction
+    }, dispatch)
+
+
+}
 
  
-export default connect(convertStoreToProps)(ProductName);
+export default connect(convertStoreToProps, mapActionToPropsAndDispatchItNow)(ProductName);
