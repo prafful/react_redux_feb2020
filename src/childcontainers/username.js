@@ -7,17 +7,20 @@ class User extends React.Component {
     state = {  }
 
     displayAllUsers = function(){
-        return this.props.allusers.map(user =>{
+        /* return this.props.allusers.map(user =>{
             console.log(user.name);
             //return {user.name}
-        })
+        }) */
+        return (
+            <div>All users!</div>
+        )
     }
 
     render() { 
         return ( 
             <div>
                 List all Users: 
-                {this.displayAllUsers()}
+                {this.displayAllUsers()} 
             </div>
          );
     }
